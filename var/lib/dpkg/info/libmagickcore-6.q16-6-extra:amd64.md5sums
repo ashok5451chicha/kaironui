@@ -1,0 +1,16 @@
+6b162e56fa48e23b96c2a313119b983e  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/djvu.la
+a43fb2be9648264e269204598750f6e9  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/djvu.so
+81350eb408b7e89e8a7a197219bde799  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/dot.la
+79bc6d7c755377813b89b12e78e38258  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/dot.so
+7c1b2027de5c4f11a0f7ec113f8282e5  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/exr.la
+3f3b9b4cb2729c9cfdf3d35244a6f42d  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/exr.so
+db9683aaf17fe484316a4d3ac428c033  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/pango.la
+532213b5ef0f6b69aac92693890f58ec  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/pango.so
+7d7e7215c3b065ba507185144a65fb52  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/svg.la
+536cfd735cdbc583504d397d6e850d34  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/svg.so
+803fe34e770a0f3dad76eb546d493bdf  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/wmf.la
+0daf550231f09757297ec9d0bb094333  usr/lib/x86_64-linux-gnu/ImageMagick-6.9.10/modules-Q16/coders/wmf.so
+972446e38ca51befc47854c1eb233325  usr/share/doc/libmagickcore-6.q16-6-extra/NEWS.Debian.gz
+f433214af28c000e705c054cac4e3f82  usr/share/doc/libmagickcore-6.q16-6-extra/changelog.Debian.gz
+78b02b3c7b2fe943567eae192e864975  usr/share/doc/libmagickcore-6.q16-6-extra/changelog.gz
+4381762ffa01e2f0366637328ff35ad8  usr/share/doc/libmagickcore-6.q16-6-extra/copyright

@@ -1,0 +1,38 @@
+{
+    "short_name": "Kairon",
+    "name": "Kairon - AI Powered Contextual Chatbot Builder",
+    "description": "Kairon is an open-source platform that uses the capabilities of RASA to help build contextual AI chatbots by providing no-code platform.",
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#2f45c5",
+    "background_color": "#ffffff",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "logo192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "logo512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Build chatbots today!",
+            "url": "/signup",
+            "description": "Register yourself on Kairon and start building bots within minutes."
+        },
+        {
+            "name": "Login",
+            "url": "/login",
+            "description": "If you're already a member, login and continue building awesome stuff."
+        }
+    ]
+}

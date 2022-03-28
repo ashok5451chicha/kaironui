@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- send: https://i.postimg.cc/JyHXh8mk/send.png -->
+<!-- bot: https://i.postimg.cc/DSMsF0Vh/bot.png -->
+<!-- user: https://i.postimg.cc/0MgwM42H/user.png -->
+<!-- close: https://i.postimg.cc/SRNLBnnn/close.png -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script>
+        // window.addEventListener('message', (event) => {
+        //     console.log(event);
+        //     const chatbox = window.parent.document.getElementById("kairon-chatbox");
+        //     const chaticon = window.document.getElementById('kairon-chat-openicon')
+        //     if (chatbox.style.display === "none") {
+        //         chatbox.style.display = "block";
+        //         chaticon.src = "https://i.postimg.cc/SRNLBnnn/close.png"
+        //         chaticon.style = 'width: 30px; height: 30px;';
+        //     } else {
+        //         chatbox.style.display = "none";
+        //         chaticon.src = 'https://uhc.com/etc/designs/uhcfoundation/resources/favicon.ico'
+        //         chaticon.style = 'width: auto; height: auto;';
+        //     }
+        //     // document.body.style = "height: 600px; width: 380px;"
+        // });
+
+        // window.addEventListener('message', (event) => {
+        //     for (let i = 0; i < event.target.parent.frames.length; i++) {
+        //         if (event.target.parent.frames[i].location.href.indexOf('clientChatbox') > -1) {
+        //             console.log(window)
+        //         }
+        //     }
+        // })
+
+        const localStorageVar = 'iframeClientOpen'
+        window.addEventListener('storage', () => {
+            console.log(localStorage.getItem(localStorageVar));
+        })
+
+        const botId = "61fbac18f4078d185e516ae0";
+        const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MWZiYWMxOGY0MDc4ZDE4NWU1MTZhZTBAaW50ZWdyYXRpb24uY29tIn0.Eh18RimEcV8jQMfyINhm8F2gfY4eX7ADE-JeKCeoNX0";
+
+        const getBotMsg = (msg) => {
+            return `<div id="bot-msg-wrapper"
+                style="display: flex; align-items: flex-end; justify-content: flex-start; width: 84%;">
+                <div id="bot-icon-wrapper"
+                    style="min-width: 32px; background-color: #f0f0f0; border-radius: 50%; height: 32px; width: 32px; display: flex; align-items: center; justify-content: center; margin-right: 6px;">
+                    <img src="https://i.postimg.cc/DSMsF0Vh/bot.png" height="16px" width="16px" alt="Bot">
+                </div>
+                <div id="bot-message"
+                    style="color:#404040; margin-top: 8px; border-radius: 6px; border-bottom-left-radius: 0; background-color: #e7f8fa; padding: 14px; font-size: 14px;">
+                    ${msg}
+                </div>
+            </div>`
+        }
+
+        const getUserMsg = (msg) => {
+            return `<div class="user-msg-wrapper"
+                style="display: flex; align-items: flex-end; justify-content: flex-end; width: 84%; align-self: flex-end;">
+                <div id="user-message"
+                    style="margin-top: 8px; border-radius: 6px; border-bottom-right-radius: 0; background-color: #eaeaea; padding: 14px; font-size: 14px;">
+                    ${msg}</div>
+                <div id="user-icon-wrapper"
+                    style="min-width: 32px; background-color: #f0f0f0; border-radius: 50%; height: 32px; width: 32px; display: flex; align-items: center; justify-content: center; margin-left: 6px;">
+                    <img src="https://i.postimg.cc/0MgwM42H/user.png" height="16px" width="16px" alt="User">
+                </div>
+            </div>`;
+        }
+
+        const handleUserMsgSend = () => {
+            const userInputTag = document.getElementById('userinput');
+            const messagesContainer = document.getElementById('message-body');
+            if (!userInputTag.value.trim()) {
+                userInputTag.value = ''
+                return;
+            }
+            const userInputValue = userInputTag.value;
+            userInputTag.value = ''
+            messagesContainer.insertAdjacentHTML('beforeend', getUserMsg(userInputValue));
+            fetch(`https://kairon-api.digite.com/api/bot/${botId}/chat`, {
+                mode: 'cors',
+                method: 'POST',
+                body: JSON.stringify({ data: userInputValue }),
+                headers: {
+                    'authorization': `Bearer ${token}`,
+                    'x-user': 'uhc-iframe-user',
+                    'Content-Type': 'application/json'
+                }
+            }).then((response) => {
+                response.json().then((res) => {
+                    const botHtml = res.data.response.map((botMsg) => getBotMsg(botMsg.text));
+                    messagesContainer.insertAdjacentHTML('beforeend', botHtml.join(''));
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                });
+            }).catch((error) => {
+                console.log(error)
+            })
+        }
+
+        let userInputField = null;
+        window.addEventListener('DOMContentLoaded', (event) => {
+            userInputField = document.getElementById('userinput');
+            console.log(event)
+            console.log(userInputField)
+            userInputField.addEventListener('keydown', (e) => {
+                if (e.keyCode === 13) {
+                    handleUserMsgSend();
+                }
+            })
+        });
+
+    </script>
+
+    <title>Client Chatbox</title>
+</head>
+
+<body style="font-family: Inter;">
+    <div id="container"
+        style="border-top-left-radius: 10px; border-top-right-radius: 10px; font-family: Inter, Arial, sans-serif; box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 5px; background-color: #ffffff;">
+        <div id="header"
+            style="border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: #e7f8fa; width: 100%; height: 64px;">
+            <img src="https://uhc.com/content/dam/uhcdotcom/website-assets/logo-blue.svg" alt="UHC Logo" height="32px"
+                style="margin: 14px 24px;">
+        </div>
+        <div id="message-body"
+            style="height: 372px; display: flex; flex-direction: column; padding: 10px; overflow: auto; scroll-behavior: smooth;">
+            <div id="bot-msg-wrapper"
+                style="display: flex; align-items: flex-end; justify-content: flex-start; width: 84%;">
+                <div id="bot-icon-wrapper"
+                    style="background-color: #f0f0f0; border-radius: 50%; height: 32px; width: 32px; display: flex; align-items: center; justify-content: center; margin-right: 6px;">
+                    <img src="https://i.postimg.cc/DSMsF0Vh/bot.png" height="16px" width="16px" alt="Bot">
+                </div>
+                <div id="bot-message"
+                    style="color:#404040; margin-top: 8px; border-radius: 6px; border-bottom-left-radius: 0; background-color: #e7f8fa; padding: 14px; font-size: 14px;">
+                    Hey. I'm your bot!.
+                </div>
+            </div>
+            <!-- <div class="user-msg-wrapper"
+                style="display: flex; align-items: flex-end; justify-content: flex-end; width: 84%; align-self: flex-end;">
+                <div id="user-message"
+                    style="margin-top: 8px; border-radius: 6px; border-bottom-right-radius: 0; background-color: #eaeaea; padding: 14px; font-size: 14px;">
+                    Hey this is your user.</div>
+                <div id="user-icon-wrapper"
+                    style="background-color: #f0f0f0; border-radius: 50%; height: 32px; width: 32px; display: flex; align-items: center; justify-content: center; margin-left: 6px;">
+                    <img src="https://i.postimg.cc/0MgwM42H/user.png" height="16px" width="16px" alt="User">
+                </div>
+            </div> -->
+        </div>
+        <div id="userInputForm"
+            style="display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 16px;">
+            <input autocomplete="off" id="userinput" type="text" placeholder="Type a message"
+                style="height: 40px; width: 76%; outline: none; border-radius: 20px; border: none; background-color: #aaaaaa22; color: #404040; font-size: 16px; padding: 0 20px;">
+            <button
+                style="border: none; background-color: #e7f8fa; border-radius: 50%; height: 40px; width: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer;"
+                type="button" onclick="handleUserMsgSend()">
+                <img src="https://i.postimg.cc/JyHXh8mk/send.png" height="18px" width="18px" alt="Send">
+            </button>
+        </div>
+    </div>
+</body>
+
+</html>
